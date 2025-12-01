@@ -1,56 +1,181 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home | TheFitBhaskar.in</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheFitBhaskar.in | Home</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-<div id="site-header"></div>
-
-<div class="main-container">
-  <section class="page-hero">
-    <h1>Transform Your Body & Mind</h1>
-    <p>
-      TheFitBhaskar.in – practical fitness coaching for real people:
-      gym + home workout, Indian diet, mindset and consistency.
-    </p>
-
-    <div class="btn-row" style="justify-content:center;">
-      <button class="btn-primary" onclick="location.href='plans.html'">
-        View Coaching Plans
-      </button>
-      <button class="btn-outline" onclick="location.href='contact.html'">
-        Apply for Coaching
-      </button>
+  <!-- Navbar: update links/labels once here to affect all pages -->
+  <header class="navbar">
+    <div class="wrapper nav-inner">
+      <a class="brand" href="index.html">TheFit<span>Bhaskar</span></a>
+      <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <nav class="nav-links">
+        <a class="active" href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="workout.html">Workout</a>
+        <a href="diet.html">Diet</a>
+        <a href="lifestyle.html">Lifestyle</a>
+        <a href="self-development.html">Self Dev.</a>
+        <a href="tools.html">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <section class="section">
-    <h2>Why TheFitBhaskar?</h2>
-    <p class="section-subtitle">
-      Fat-to-fit personal journey, balanced with office & daily life – same formula shared with you.
-    </p>
+  <main>
+    <div class="wrapper">
+      <!-- Hero -->
+      <section class="hero" id="top">
+        <div class="hero-content">
+          <p class="pill">Fitness Journey</p>
+          <h1 class="hero-title">The Fit Bhaskar</h1>
+          <p class="hero-subtitle">
+            Documenting my fitness journey — gym, diet, lifestyle & self growth. Follow along for simple, sustainable progress.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="#about-preview">Start My Journey</a>
+            <a class="btn btn-secondary" href="tools.html">Use BMI Tool</a>
+          </div>
+        </div>
+      </section>
 
-    <div class="grid">
-      <div class="card">
-        <h3>Realistic Plans</h3>
-        <p>No 2–3 hour bro-split, no extreme diet. Simple plans that fit your actual routine.</p>
+      <!-- Quick Info Strip -->
+      <section class="section">
+        <h2 class="section-heading">What you'll find here</h2>
+        <p class="section-subtext">Exercises, diet, lifestyle and mindset resources in one place.</p>
+        <div class="grid-4 grid-3">
+          <div class="card"><h3>Exercises</h3><p class="meta">Learn correct form and technique.</p></div>
+          <div class="card"><h3>Diet & Nutrition</h3><p class="meta">Understand calories and macros.</p></div>
+          <div class="card"><h3>Lifestyle</h3><p class="meta">Build sustainable healthy habits.</p></div>
+          <div class="card"><h3>Self Development</h3><p class="meta">Discipline, focus & routine.</p></div>
+        </div>
+      </section>
+
+      <!-- About preview -->
+      <section class="section" id="about-preview">
+        <div class="split">
+          <div>
+            <h2 class="section-heading">About Bhaskar</h2>
+            <p class="section-subtext">Engineer by day, fitness enthusiast by choice. Balancing office, gym, and self-growth.</p>
+            <p class="meta">Head to the About page for the full story, milestones, and routine breakdown.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="about.html">Read My Story</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Mini BMI Teaser</h3>
+            <p class="meta">Quick estimate — detailed tools live on the Tools page.</p>
+            <form id="mini-bmi-form">
+              <label for="mini-height">Height (cm)</label>
+              <input id="mini-height" name="height" type="number" min="50" max="250" required>
+              <label for="mini-weight">Weight (kg)</label>
+              <input id="mini-weight" name="weight" type="number" min="10" max="300" required>
+              <button class="btn btn-secondary" type="submit">Calculate</button>
+            </form>
+            <p id="mini-bmi-output" class="meta"></p>
+            <p class="note" style="margin-top:10px;">For full BMI & health assessment tools, visit the <a href="tools.html">Tools page</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Sections -->
+      <section class="section">
+        <h2 class="section-heading">Explore</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Workout Library</h3>
+            <p class="meta">Form cues, mistakes to avoid, and rep ranges.</p>
+            <a class="btn btn-secondary" href="workout.html">Open Workouts</a>
+          </div>
+          <div class="card">
+            <h3>Diet & Nutrition</h3>
+            <p class="meta">Veg-friendly macros, food lists, and sample plans.</p>
+            <a class="btn btn-secondary" href="diet.html">See Diet Guides</a>
+          </div>
+          <div class="card">
+            <h3>Self Development</h3>
+            <p class="meta">Discipline, routines, and personal rules.</p>
+            <a class="btn btn-secondary" href="self-development.html">Grow Mindset</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured YouTube -->
+      <section class="section">
+        <h2 class="section-heading">Featured YouTube Videos</h2>
+        <div class="grid-3">
+          <div class="card">
+            <img src="assets/images/video-placeholder.jpg" alt="Video placeholder">
+            <h3>Upper Body Strength</h3>
+            <a class="btn btn-primary" href="#" target="_blank">Watch on YouTube</a>
+          </div>
+          <div class="card">
+            <img src="assets/images/video-placeholder.jpg" alt="Video placeholder">
+            <h3>Home Fat Loss Circuit</h3>
+            <a class="btn btn-primary" href="#" target="_blank">Watch on YouTube</a>
+          </div>
+          <div class="card">
+            <img src="assets/images/video-placeholder.jpg" alt="Video placeholder">
+            <h3>Meal Prep Basics</h3>
+            <a class="btn btn-primary" href="#" target="_blank">Watch on YouTube</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog highlights -->
+      <section class="section">
+        <h2 class="section-heading">Latest from the Blog</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Full Body vs Split</h3>
+            <p class="meta">Choosing the right program for your schedule.</p>
+            <a class="btn btn-secondary" href="blog.html">Read more</a>
+          </div>
+          <div class="card">
+            <h3>Veg Protein Sources</h3>
+            <p class="meta">Hit protein goals with Indian vegetarian foods.</p>
+            <a class="btn btn-secondary" href="blog.html">Read more</a>
+          </div>
+          <div class="card">
+            <h3>Consistency Playbook</h3>
+            <p class="meta">Simple rules that keep me on track daily.</p>
+            <a class="btn btn-secondary" href="blog.html">Read more</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrapper footer-inner">
+      <div>
+        <strong>TheFitBhaskar</strong> &copy; <span id="year"></span> | Personal documentation project
       </div>
-      <div class="card">
-        <h3>Indian Diet Focus</h3>
-        <p>Roti, dal, chawal, sabzi – sab allowed. We manage quantity, timing, and protein.</p>
-      </div>
-      <div class="card">
-        <h3>Mindset & Discipline</h3>
-        <p>“Main girunga, par phir uthunga” – we build long-term habits, not 21-day magic.</p>
+      <div class="socials">
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Email">@</a>
       </div>
     </div>
-  </section>
-</div>
+  </footer>
 
-<div id="site-footer"></div>
-<script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
