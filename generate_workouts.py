@@ -56,9 +56,9 @@ def benefits(primary: str, secondary: str) -> list[str]:
 
 def mistakes() -> list[str]:
     return [
-        "Using momentum instead of control—slow the eccentric and stay braced.",
-        "Cutting range of motion—work through a comfortable full range for better stimulus.",
-        "Letting joints misalign—keep neutral wrists, stacked elbows/shoulders, and stable posture.",
+        "Using momentum instead of control - slow the eccentric and stay braced.",
+        "Cutting range of motion - work through a comfortable full range for better stimulus.",
+        "Letting joints misalign - keep neutral wrists, stacked elbows/shoulders, and stable posture.",
     ]
 
 
@@ -71,35 +71,160 @@ def card_html(name: str, primary: str, secondary: str, equipment: str) -> str:
         return "\n".join(f"      <li>{escape(text)}</li>" for text in items)
 
     return f"""    <article class="exercise-card">
-      <h3 class="exercise-title">{escape(name)}</h3>
-      <div class="exercise-meta">
-        <p><strong>Primary Muscle:</strong> {escape(primary)}</p>
-        <p><strong>Secondary Muscles:</strong> {escape(secondary)}</p>
-        <p><strong>Equipment:</strong> {escape(equipment)}</p>
-      </div>
-      <div class="how-to">
-        <h4>How to Perform</h4>
-        <ol>
+      <details>
+        <summary class="exercise-toggle">
+          <span class="exercise-title">{escape(name)}</span>
+          <span class="toggle-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="exercise-body">
+          <div class="exercise-meta">
+            <p><strong>Primary Muscle:</strong> {escape(primary)}</p>
+            <p><strong>Secondary Muscles:</strong> {escape(secondary)}</p>
+            <p><strong>Equipment:</strong> {escape(equipment)}</p>
+          </div>
+          <div class="how-to">
+            <h4>How to Perform</h4>
+            <ol>
 {li(how_to)}
-        </ol>
-      </div>
-      <div class="benefits">
-        <h4>Benefits</h4>
-        <ul>
+            </ol>
+          </div>
+          <div class="benefits">
+            <h4>Benefits</h4>
+            <ul>
 {li(benes)}
-        </ul>
-      </div>
-      <div class="mistakes">
-        <h4>Common Mistakes</h4>
-        <ul>
+            </ul>
+          </div>
+          <div class="mistakes">
+            <h4>Common Mistakes</h4>
+            <ul>
 {li(errs)}
-        </ul>
-      </div>
-      <div class="video-link">
-        <h4>Video Demonstration</h4>
-        <p>[ VIDEO LINK HERE ]</p>
-      </div>
+            </ul>
+          </div>
+          <div class="video-link">
+            <h4>Video Demonstration</h4>
+            <p>[ VIDEO LINK HERE ]</p>
+          </div>
+        </div>
+      </details>
     </article>"""
+
+
+def wrap_page(content: str, title: str, active: str = "workout") -> str:
+    def nav_link(key: str, label: str, href: str) -> str:
+        active_class = ' class="active"' if key == active else ""
+        return f'        <a{active_class} href="{href}">{label}</a>'
+
+    nav = "\n".join(
+        [
+            nav_link("home", "Home", "index.html"),
+            nav_link("about", "About", "about.html"),
+            nav_link("workout", "Workout", "workout.html"),
+            nav_link("diet", "Diet", "diet.html"),
+            nav_link("lifestyle", "Lifestyle", "lifestyle.html"),
+            nav_link("selfdev", "Self Dev.", "self-development.html"),
+            nav_link("tools", "Tools", "tools.html"),
+            nav_link("blog", "Blog", "blog.html"),
+            nav_link("gallery", "Gallery", "gallery.html"),
+            nav_link("youtube", "YouTube", "youtube.html"),
+            nav_link("contact", "Contact", "contact.html"),
+        ]
+    )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{escape(title)}</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="wrapper nav-inner">
+      <a class="brand" href="index.html">TheFit<span>Bhaskar</span></a>
+      <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <nav class="nav-links">
+{nav}
+      </nav>
+    </div>
+  </header>
+
+{content}
+
+  <footer class="footer">
+    <div class="wrapper footer-inner">
+      <div><strong>TheFitBhaskar</strong> &copy; <span id="year"></span></div>
+      <div class="socials">
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Email">@</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (() => {{
+      const buttons = document.querySelectorAll('[data-action]');
+      const getDetails = () => Array.from(document.querySelectorAll('.exercise-card details'));
+      const getGrid = () => document.querySelector('.exercise-grid');
+      const getCards = () => Array.from(document.querySelectorAll('.exercise-card'));
+      let expandMode = false;
+
+      // Single-open behavior: open one, close others
+      document.addEventListener('click', (e) => {{
+        const summary = e.target.closest('summary.exercise-toggle');
+        if (!summary) return;
+        if (expandMode) return; // in expand-all mode, keep standard behavior
+        const currentDetails = summary.closest('details');
+        const currentCard = summary.closest('.exercise-card');
+        const grid = getGrid();
+        // Close others
+        getDetails().forEach((d) => {{
+          if (d !== currentDetails) d.removeAttribute('open');
+        }});
+        getCards().forEach((c) => c.classList.remove('active-card'));
+        currentCard.classList.add('active-card');
+        grid?.classList.add('single-focus');
+      }});
+
+      buttons.forEach((btn) => {{
+        btn.addEventListener('click', () => {{
+          const act = btn.getAttribute('data-action');
+          if (act === 'expand-all') {{
+            getDetails().forEach((d) => d.setAttribute('open', 'true'));
+            expandMode = true;
+            getCards().forEach((c) => c.classList.remove('active-card'));
+            getGrid()?.classList.remove('single-focus');
+          }} else if (act === 'collapse-all') {{
+            getDetails().forEach((d) => d.removeAttribute('open'));
+            expandMode = false;
+            getCards().forEach((c) => c.classList.remove('active-card'));
+            getGrid()?.classList.remove('single-focus');
+          }}
+        }});
+      }});
+
+      // If user manually closes an open detail, reset single-focus
+      getDetails().forEach((d) => {{
+        d.addEventListener('toggle', () => {{
+          if (!expandMode && !d.open) {{
+            getCards().forEach((c) => c.classList.remove('active-card'));
+            getGrid()?.classList.remove('single-focus');
+          }}
+        }});
+      }});
+    }})();
+  </script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
+"""
 
 
 def page_html(title: str, intro: list[str], exercises: list[dict]) -> str:
@@ -114,14 +239,20 @@ def page_html(title: str, intro: list[str], exercises: list[dict]) -> str:
         for ex in exercises
     )
     return f"""<main>
-  <header class="page-header">
-    <h1>{escape(title)}</h1>
-    {intro_html}
-  </header>
+  <div class="wrapper">
+    <header class="page-header">
+      <h1>{escape(title)}</h1>
+      {intro_html}
+    </header>
+    <div class="exercise-actions">
+      <button class="button" data-action="expand-all">Expand All</button>
+      <button class="button-secondary" data-action="collapse-all">Collapse All</button>
+    </div>
 
-  <section class="exercise-grid">
+    <section class="exercise-grid">
 {cards}
-  </section>
+    </section>
+  </div>
 </main>
 """
 
@@ -209,12 +340,19 @@ def legs_page():
         "Mix bilateral and unilateral work plus hinges to build strength, size, and resilience.",
     ]
     intro_html = "\n    ".join(f"<p>{escape(p)}</p>" for p in intro)
+    body_sections = "\n".join(parts)
     return f"""<main>
-  <header class="page-header">
-    <h1>Leg Training</h1>
-    {intro_html}
-  </header>
-{chr(10).join(parts)}
+  <div class="wrapper">
+    <header class="page-header">
+      <h1>Leg Training</h1>
+      {intro_html}
+    </header>
+    <div class="exercise-actions">
+      <button class="button" data-action="expand-all">Expand All</button>
+      <button class="button-secondary" data-action="collapse-all">Collapse All</button>
+    </div>
+{body_sections}
+  </div>
 </main>
 """
 
@@ -561,14 +699,15 @@ def main():
             for name in group["exercises"]
         ]
         html = page_html(group["title"], group["intro"], ex_dicts)
+        full = wrap_page(html, f"TheFitBhaskar.in | {group['title']}", active="workout")
         with open(group["filename"], "w", encoding="utf-8") as f:
-            f.write(html)
+            f.write(full)
 
     with open("legs.html", "w", encoding="utf-8") as f:
-        f.write(legs_page())
+        f.write(wrap_page(legs_page(), "TheFitBhaskar.in | Leg Training", active="workout"))
 
     with open("abs.html", "w", encoding="utf-8") as f:
-        f.write(abs_page())
+        f.write(wrap_page(abs_page(), "TheFitBhaskar.in | Abs & Core", active="workout"))
 
 
 if __name__ == "__main__":

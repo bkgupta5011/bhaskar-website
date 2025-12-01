@@ -1,49 +1,101 @@
-<main>
-  <header class="page-header">
-    <h1>Workout Library</h1>
-    <p>Choose a muscle group to explore detailed exercise guides for TheFitBhaskar.in.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheFitBhaskar.in | Workout Library</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="wrapper nav-inner">
+      <a class="brand" href="index.html">TheFit<span>Bhaskar</span></a>
+      <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="workout.html">Workout</a>
+        <a href="diet.html">Diet</a>
+        <a href="lifestyle.html">Lifestyle</a>
+        <a href="self-development.html">Self Dev.</a>
+        <a href="tools.html">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="youtube.html">YouTube</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="muscle-grid">
-    <article class="muscle-card">
-      <h2>Chest</h2>
-      <p>Presses, flyes, and push variations to build pressing strength and upper-body size.</p>
-      <a class="button" href="chest.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Back</h2>
-      <p>Rows, pulls, and hinges that grow the lats, traps, and spinal erectors for a strong frame.</p>
-      <a class="button" href="back.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Shoulders</h2>
-      <p>Presses and raises to develop the delts for balanced upper-body width and stability.</p>
-      <a class="button" href="shoulders.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Biceps</h2>
-      <p>Curls and cable work targeting elbow flexion and forearm supination strength.</p>
-      <a class="button" href="biceps.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Triceps</h2>
-      <p>Extensions, press-downs, and dips to power your lockout and arm thickness.</p>
-      <a class="button" href="triceps.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Forearms</h2>
-      <p>Grip and wrist builders for stronger holds and balanced arm development.</p>
-      <a class="button" href="forearms.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Legs</h2>
-      <p>Squats, lunges, hinges, and calf work for complete lower-body strength and power.</p>
-      <a class="button" href="legs.html">View Exercises</a>
-    </article>
-    <article class="muscle-card">
-      <h2>Abs &amp; Core</h2>
-      <p>Anti-flexion, anti-rotation, and leg raise drills to stabilize and protect your spine.</p>
-      <a class="button" href="abs.html">View Exercises</a>
-    </article>
-  </section>
-</main>
+  <main>
+    <div class="wrapper">
+      <header class="page-header">
+        <h1>Workout Library</h1>
+        <p>Choose a muscle group to explore detailed exercise guides for TheFitBhaskar.in.</p>
+      </header>
+
+      <section class="muscle-grid">
+        <article class="muscle-card">
+          <h2>Chest</h2>
+          <p>Presses, flyes, and push variations to build pressing strength and upper-body size.</p>
+          <a class="button" href="chest.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Back</h2>
+          <p>Rows, pulls, and hinges that grow the lats, traps, and spinal erectors for a strong frame.</p>
+          <a class="button" href="back.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Shoulders</h2>
+          <p>Presses and raises to develop the delts for balanced upper-body width and stability.</p>
+          <a class="button" href="shoulders.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Biceps</h2>
+          <p>Curls and cable work targeting elbow flexion and forearm supination strength.</p>
+          <a class="button" href="biceps.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Triceps</h2>
+          <p>Extensions, press-downs, and dips to power your lockout and arm thickness.</p>
+          <a class="button" href="triceps.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Forearms</h2>
+          <p>Grip and wrist builders for stronger holds and balanced arm development.</p>
+          <a class="button" href="forearms.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Legs</h2>
+          <p>Squats, lunges, hinges, and calf work for complete lower-body strength and power.</p>
+          <a class="button" href="legs.html">View Exercises</a>
+        </article>
+        <article class="muscle-card">
+          <h2>Abs &amp; Core</h2>
+          <p>Anti-flexion, anti-rotation, and leg raise drills to stabilize and protect your spine.</p>
+          <a class="button" href="abs.html">View Exercises</a>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrapper footer-inner">
+      <div><strong>TheFitBhaskar</strong> &copy; <span id="year"></span></div>
+      <div class="socials">
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Email">@</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
