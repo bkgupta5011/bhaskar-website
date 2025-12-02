@@ -120,4 +120,124 @@ document.addEventListener("DOMContentLoaded", () => {
       contactForm.reset();
     });
   }
+
+  // Diet page: live Google Sheet table
+  const foodTableBody = document.querySelector("#food-tbody");
+  if (foodTableBody) {
+    const searchInput = document.querySelector("#food-search");
+    const stateFilter = document.querySelector("#state-filter");
+    const refreshBtn = document.querySelector("#refresh-sheet");
+    const statusEl = document.querySelector("#sheet-status");
+    const chipCalories = document.querySelector("#chip-calories");
+    const chipProtein = document.querySelector("#chip-protein");
+    const chipCarbs = document.querySelector("#chip-carbs");
+    const chipFat = document.querySelector("#chip-fat");
+    const chipFibre = document.querySelector("#chip-fibre");
+
+    const sheetId = "1ySzTGIRSipjieOl38WXnVHk-LCmVGKlq3YEx22kEgxE";
+    const sheetName = "Food";
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
+
+    let foodData = [];
+
+    const parseGvizJson = raw => {
+      // gviz returns JS function wrapper; we strip it to get JSON
+      const start = raw.indexOf("{");
+      const end = raw.lastIndexOf("}");
+      if (start === -1 || end === -1) return null;
+      try {
+        const json = JSON.parse(raw.substring(start, end + 1));
+        return json?.table?.rows || [];
+      } catch (err) {
+        console.error("Sheet parse error", err);
+        return null;
+      }
+    };
+
+    const renderChips = entry => {
+      chipCalories.textContent = entry?.calories || "—";
+      chipProtein.textContent = entry?.protein || "—";
+      chipCarbs.textContent = entry?.carbs || "—";
+      chipFat.textContent = entry?.fat || "—";
+      chipFibre.textContent = entry?.fibre || "—";
+    };
+
+    const renderTable = rows => {
+      if (!rows.length) {
+        foodTableBody.innerHTML = `<tr><td colspan="9">No matches. Try a different keyword.</td></tr>`;
+        renderChips(null);
+        return;
+      }
+      const safeText = val => (val === null || val === undefined ? "" : val);
+      foodTableBody.innerHTML = rows
+        .map(
+          row => `<tr>
+            <td>${safeText(row.food)}</td>
+            <td>${safeText(row.state)}</td>
+            <td>${safeText(row.calories)}</td>
+            <td>${safeText(row.protein)}</td>
+            <td>${safeText(row.carbs)}</td>
+            <td>${safeText(row.fat)}</td>
+            <td>${safeText(row.fibre)}</td>
+            <td>${safeText(row.other)}</td>
+            <td><a class="btn btn-secondary btn-ghost" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(row.food + ' food')}" target="_blank" rel="noopener">View</a></td>
+          </tr>`
+        )
+        .join("");
+      renderChips(rows[0]);
+    };
+
+    const applyFilters = () => {
+      const q = (searchInput?.value || "").toLowerCase().trim();
+      const state = stateFilter?.value || "";
+      const filtered = foodData.filter(item => {
+        const matchesQuery = q ? item.food.toLowerCase().includes(q) || (item.other || "").toLowerCase().includes(q) : true;
+        const matchesState = state ? item.state === state : true;
+        return matchesQuery && matchesState;
+      });
+      renderTable(filtered.slice(0, 150)); // safety limit for UI
+      if (statusEl) statusEl.textContent = `Showing ${Math.min(filtered.length, 150)} of ${filtered.length} foods from Google Sheet.`;
+    };
+
+    const fetchSheet = async () => {
+      if (statusEl) statusEl.textContent = "Loading data from Google Sheet…";
+      try {
+        const res = await fetch(sheetUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const rows = parseGvizJson(text);
+        if (!rows) throw new Error("Could not parse sheet data");
+        foodData = rows
+          .map(r => {
+            const c = r.c || [];
+            return {
+              food: c[0]?.v || "",
+              state: c[1]?.v || "",
+              calories: c[2]?.v || "",
+              protein: c[3]?.v || "",
+              carbs: c[4]?.v || "",
+              fat: c[5]?.v || "",
+              fibre: c[6]?.v || "",
+              other: c[7]?.v || ""
+            };
+          })
+          .filter(item => item.food);
+        applyFilters();
+        if (statusEl) statusEl.textContent = `Connected. Last pulled ${new Date().toLocaleTimeString()}.`;
+      } catch (err) {
+        console.error(err);
+        foodTableBody.innerHTML = `<tr><td colspan="8">Could not load sheet. Check sharing or refresh.</td></tr>`;
+        if (statusEl) statusEl.textContent = "Error loading sheet. Check link/sharing and try again.";
+        renderChips(null);
+      }
+    };
+
+    // Wire events
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    if (stateFilter) stateFilter.addEventListener("change", applyFilters);
+    if (refreshBtn) refreshBtn.addEventListener("click", fetchSheet);
+
+    // Initial load
+    fetchSheet();
+  }
 });
