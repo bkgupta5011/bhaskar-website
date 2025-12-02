@@ -34,37 +34,44 @@
 
   <main>
     <section class="section">
-      <div class="wrapper card">
-        <p class="pill">Blog</p>
-        <h1 class="hero-title">Submit Your Fitness Blog</h1>
-        <p class="section-subtext">Share your gym story, transformation, tips, or nutrition ideas with the community.</p>
-        <form class="blog-form" id="blog-form">
-          <div class="form-group">
-            <label for="blog-name">Name</label>
-            <input id="blog-name" class="blog-input" type="text" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label for="blog-email">Email</label>
-            <input id="blog-email" class="blog-input" type="email" name="email" placeholder="you@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="blog-subject">Subject</label>
-            <input id="blog-subject" class="blog-input" type="text" name="subject" placeholder="What is your blog about?" required>
-          </div>
-          <div class="form-group">
-            <label for="blog-content">Your Blog</label>
-            <textarea id="blog-content" class="blog-textarea" name="content" rows="6" placeholder="Write your blog here..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary blog-submit-btn">Submit</button>
-          <div class="form-message" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
-
-    <section class="section">
       <div class="wrapper">
-        <h2 class="section-heading">Community Blog Posts</h2>
-        <div id="blog-list" class="blog-list"></div>
+        <div class="section-heading-block">
+          <p class="pill">Blog</p>
+          <h1 class="hero-title">Community Blog Posts</h1>
+          <p class="section-subtext">Read approved posts first. Submit yours on the right to join the feed.</p>
+        </div>
+
+        <div class="blog-layout">
+          <div class="blog-feed">
+            <h2 class="section-heading">Latest Posts</h2>
+            <div id="blog-list" class="blog-list"></div>
+          </div>
+
+          <div class="blog-form-card card">
+            <h3 class="section-heading">Submit Your Fitness Blog</h3>
+            <p class="section-subtext">Share your gym story, transformation, tips, or nutrition ideas.</p>
+            <form class="blog-form" id="blog-form">
+              <div class="form-group">
+                <label for="blog-name">Name</label>
+                <input id="blog-name" class="blog-input" type="text" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="blog-email">Email</label>
+                <input id="blog-email" class="blog-input" type="email" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="blog-subject">Subject</label>
+                <input id="blog-subject" class="blog-input" type="text" name="subject" placeholder="What is your blog about?" required>
+              </div>
+              <div class="form-group">
+                <label for="blog-content">Your Blog</label>
+                <textarea id="blog-content" class="blog-textarea" name="content" rows="6" placeholder="Write your blog here..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary blog-submit-btn">Submit</button>
+              <div class="form-message" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
