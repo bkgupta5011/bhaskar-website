@@ -96,6 +96,128 @@
         </div>
       </section>
 
+      <!-- Day Calorie Planner -->
+      <section class="section calorie-planner" id="calorie-planner">
+        <div class="data-header">
+          <div>
+            <p class="pill">Live sheet powered</p>
+            <h2 class="section-heading">Day Calorie & Macro Planner</h2>
+            <p class="section-subtext">Pick foods from your Google Sheet lookup, drop them into meals, see totals, and save as PDF.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-secondary" type="button" id="planner-reset">Clear day</button>
+            <button class="btn btn-primary" type="button" id="planner-download">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="planner-grid">
+          <div class="card">
+            <h3>Add food to a meal</h3>
+            <label class="field" for="planner-food">
+              <span>Food (from sheet)</span>
+              <input id="planner-food" list="planner-food-options" type="search" placeholder="Type to search (English/Hindi)">
+              <datalist id="planner-food-options"></datalist>
+            </label>
+            <label class="field" for="planner-meal">
+              <span>Meal</span>
+              <select id="planner-meal">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="snacks">Evening Snacks</option>
+                <option value="dinner">Dinner</option>
+              </select>
+            </label>
+            <label class="field" for="planner-note">
+              <span>Note (optional)</span>
+              <input id="planner-note" type="text" placeholder="e.g., 2 rotis / 150g cooked">
+            </label>
+            <button class="btn btn-primary" type="button" id="planner-add">Add to meal</button>
+            <p id="planner-status" class="meta" style="margin-top:8px;">Loading foods from Google Sheet…</p>
+          </div>
+
+          <div class="card">
+            <h3>Day summary</h3>
+            <div class="macro-chips" id="planner-summary">
+              <div class="chip">
+                <p class="chip-label">Calories</p>
+                <p class="chip-value" id="sum-calories">0 kcal</p>
+              </div>
+              <div class="chip">
+                <p class="chip-label">Protein</p>
+                <p class="chip-value" id="sum-protein">0 g</p>
+              </div>
+              <div class="chip">
+                <p class="chip-label">Carbs</p>
+                <p class="chip-value" id="sum-carbs">0 g</p>
+              </div>
+              <div class="chip">
+                <p class="chip-label">Fat</p>
+                <p class="chip-value" id="sum-fat">0 g</p>
+              </div>
+              <div class="chip">
+                <p class="chip-label">Fibre</p>
+                <p class="chip-value" id="sum-fibre">0 g</p>
+              </div>
+            </div>
+            <p class="note" style="margin-top:12px;">Values are per 100g as stored in your sheet unless you add a note for portion. Adjust portions as needed.</p>
+          </div>
+        </div>
+
+        <div class="meal-tables">
+          <div class="meal-card">
+            <div class="meal-card-head">
+              <h3>Breakfast</h3>
+              <button class="btn btn-secondary btn-ghost" data-meal="breakfast">Clear</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Food</th><th>Cal</th><th>P</th><th>C</th><th>F</th><th>Note</th><th></th></tr>
+              </thead>
+              <tbody id="meal-breakfast"><tr><td colspan="7">No items yet.</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-head">
+              <h3>Lunch</h3>
+              <button class="btn btn-secondary btn-ghost" data-meal="lunch">Clear</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Food</th><th>Cal</th><th>P</th><th>C</th><th>F</th><th>Note</th><th></th></tr>
+              </thead>
+              <tbody id="meal-lunch"><tr><td colspan="7">No items yet.</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-head">
+              <h3>Evening Snacks</h3>
+              <button class="btn btn-secondary btn-ghost" data-meal="snacks">Clear</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Food</th><th>Cal</th><th>P</th><th>C</th><th>F</th><th>Note</th><th></th></tr>
+              </thead>
+              <tbody id="meal-snacks"><tr><td colspan="7">No items yet.</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="meal-card">
+            <div class="meal-card-head">
+              <h3>Dinner</h3>
+              <button class="btn btn-secondary btn-ghost" data-meal="dinner">Clear</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>Food</th><th>Cal</th><th>P</th><th>C</th><th>F</th><th>Note</th><th></th></tr>
+              </thead>
+              <tbody id="meal-dinner"><tr><td colspan="7">No items yet.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- About preview -->
       <section class="section" id="about-preview">
         <div class="split">
