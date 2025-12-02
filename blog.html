@@ -33,83 +33,42 @@
   </header>
 
   <main>
-    <div class="wrapper">
-      <section class="hero">
-        <div class="hero-content">
-          <p class="pill">Blog</p>
-          <h1 class="hero-title">Articles & Updates</h1>
-          <p class="hero-subtitle">Workout, diet, lifestyle, and self-development posts. Replace placeholders with real posts.</p>
-        </div>
-      </section>
+    <section class="section">
+      <div class="wrapper card">
+        <p class="pill">Blog</p>
+        <h1 class="hero-title">Submit Your Fitness Blog</h1>
+        <p class="section-subtext">Share your gym story, transformation, tips, or nutrition ideas with the community.</p>
+        <form class="blog-form" id="blog-form">
+          <div class="form-group">
+            <label for="blog-name">Name</label>
+            <input id="blog-name" class="blog-input" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="blog-email">Email</label>
+            <input id="blog-email" class="blog-input" type="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="blog-subject">Subject</label>
+            <input id="blog-subject" class="blog-input" type="text" name="subject" placeholder="What is your blog about?" required>
+          </div>
+          <div class="form-group">
+            <label for="blog-content">Your Blog</label>
+            <textarea id="blog-content" class="blog-textarea" name="content" rows="6" placeholder="Write your blog here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary blog-submit-btn">Submit</button>
+          <div class="form-message" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
 
-      <section class="section" id="community">
-        <div class="grid-2">
-          <div class="card">
-            <h2 class="section-heading">Share your post</h2>
-            <p class="section-subtext">Write anything about fitness, diet, or lifestyle. It saves locally in your browser.</p>
-            <form id="community-form">
-              <div class="field">
-                <label for="post-author">Your name</label>
-                <input id="post-author" name="author" type="text" placeholder="e.g., Bhaskar" maxlength="80" required>
-              </div>
-              <div class="field">
-                <label for="post-body">Your post</label>
-                <textarea id="post-body" name="body" placeholder="Share your thoughts..." maxlength="1200" required></textarea>
-              </div>
-              <button class="btn btn-primary" type="submit">Publish</button>
-              <p class="note">Posts stay on this device only (localStorage). Clear browser data to remove.</p>
-            </form>
-          </div>
-          <div class="card">
-            <div class="section-heading">Community posts</div>
-            <div class="section-subtext">Newest first. Date and name are shown under each post.</div>
-            <div id="community-posts" class="community-feed" aria-live="polite"></div>
-          </div>
-        </div>
-      </section>
+    <section class="section">
+      <div class="wrapper">
+        <h2 class="section-heading">Community Blog Posts</h2>
+        <div id="blog-list" class="blog-list"></div>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-heading">Latest Posts</h2>
-        <div class="grid-3">
-          <div class="card">
-            <p class="meta">Workout • Jan 2025</p>
-            <h3>Upper/Lower vs Push Pull Legs</h3>
-            <p class="meta">How to pick a split that fits 3-5 days per week.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-          <div class="card">
-            <p class="meta">Diet • Jan 2025</p>
-            <h3>Protein Planning for Vegetarians</h3>
-            <p class="meta">Rotis, dals, paneer, soya — hitting daily protein targets.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-          <div class="card">
-            <p class="meta">Lifestyle • Dec 2024</p>
-            <h3>Office + Gym Balance</h3>
-            <p class="meta">Time blocks, meal prep, and non-negotiables.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-          <div class="card">
-            <p class="meta">Self Dev • Dec 2024</p>
-            <h3>Building Discipline</h3>
-            <p class="meta">Systems, environment, and habit stacks.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-          <div class="card">
-            <p class="meta">Diet • Nov 2024</p>
-            <h3>Meal Prep for Busy Weeks</h3>
-            <p class="meta">Batch cook ideas and storage tips.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-          <div class="card">
-            <p class="meta">Workout • Nov 2024</p>
-            <h3>Warm-up Routines</h3>
-            <p class="meta">Simple flows to protect joints and lift better.</p>
-            <a class="btn btn-secondary" href="#">Read More</a>
-          </div>
-        </div>
-      </section>
-    </div>
+    <script src="blog.js"></script>
   </main>
 
   <footer class="footer">
